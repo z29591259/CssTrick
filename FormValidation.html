@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Form Validation</title>
+		<style>
+		input + .check_result:before{
+			width: 1em;
+			height: 1em;
+        	margin-left: 4px;
+        	padding: 2px;
+        	color: black;
+        	text-align: center;
+			/*Trick for IE11 won't update immediately.*/
+			animation: repaint 1000s infinite linear;
+		}
+		input:invalid + .check_result:before{	
+			content: "\2716";
+			background-color: pink;
+		}
+		input:valid + .check_result:before{	
+			content: "\2714";
+			background-color: lightgreen;
+		}
+		input:focus:invalid {
+		  background-color: pink;
+		}
+		
+		@keyframes repaint {
+			from { opacity: 1; }
+			to { opacity: 0.99999; }
+		}
+		</style>
+	</head>
+	<body>
+		<h1>Form Validation</h1>
+		<ul>
+			<li><a href="#required">required</a></li>
+			<li><a href="#input_types">Input Types</a></li>
+			<li><a href="#valid_invalid_style">Valid & Invalid Style</a></li>
+		</ul>
+		<h2 id="required">required</h2>
+		<form>
+			Username: <input name="username" type="text" required /><br />
+			<input type="submit" value="Submit" />
+		</form>
+		<h2 id="input_types">Input Types</h2>
+		<form>
+			Username: <input name="username" type="text" required minlength="3" maxlength="5" placeholder="3-5 characters" /><br />
+			Email: <input type="email" required /><br />
+			Date: <input type="date" placeholder="yyyy-mm-dd" required /><br />
+			Number: <input type="number" required /><br />
+			Color:　<input type="color" required /><br />
+			Time: <input type="time" placeholder="HH:mm" /><br />
+			Tel: <input id="telNo" name="telNo" type="tel" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br />
+			<input type="submit" value="Submit" />
+		</form>
+		<h2 id="valid_invalid_style">Valid & Invalid Style</h2>
+		<form>
+			Email: <input type="email" required /><span class="check_result"></span><br />
+			Tel: <input id="telNo" name="telNo" type="tel" required pattern="0[0-9]{3}-[0-9]{3}-[0-9]{3}" placeholder="0912-345-678"><span class="check_result"></span><br />
+			<input type="submit" value="Submit" />
+		</form>
+	</body>
+</html>
